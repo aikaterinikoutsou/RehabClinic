@@ -21,6 +21,8 @@ public class Patient implements Serializable{
 	private String email;
 	private Integer credit_card;
 	private Therapists therapist;
+
+	private String history;
 	
 	
 	public Patient() {
