@@ -20,6 +20,8 @@ public class Therapists implements Serializable{
 	private String speciality;
 	private List<Patient> patients;
 	
+	private Integer vacations;
+	
 	public Therapists() {
 		super();
 		patients = new ArrayList<Patient>();
