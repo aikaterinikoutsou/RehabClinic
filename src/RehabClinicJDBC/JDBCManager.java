@@ -20,7 +20,7 @@ public class JDBCManager {
 		System.out.println("Database connection opened");	
 		
 		createTables();
-		System.out.println("Tables created and default values inserted");
+		
 		
 		}	
 		catch(SQLException e)
@@ -92,15 +92,25 @@ public class JDBCManager {
 					+"VALUES('Maria', 'Dallas', 'Physio', 'maria@email.com', 89234545)";
 			stmt.executeUpdate(sql);
 			
+			System.out.println("Tables created and default values inserted");
+			
 			
 		}catch(SQLException e) {
 			
 			if(!e.getMessage().contains("already exists"))
 				e.printStackTrace();
+		}			
+		
+	}
+	
+	public void closeConnection() {
+		
+		try {		
+			c.close();
+		}catch(SQLException e)
+		{	
+			e.printStackTrace();
 		}
-		
-		
-		
 	}
 	
 }

@@ -15,6 +15,8 @@ public class menu {
 			
 		
 		System.out.println("Hello World");
+		
+		jdbcmanager.closeConnection();
 
 		
 	}
