@@ -17,7 +17,10 @@ public class JDBCManager {
 		c = DriverManager.getConnection("jdbc:sqlite:./db/rehabclinic.db");
 		c.createStatement().execute("PRAGMA foreign_keys=ON");
 		
-		System.out.println("Database connection opened");		
+		System.out.println("Database connection opened");	
+		
+		createTables();
+		System.out.println("Tables created and default values inserted");
 		
 		}	
 		catch(SQLException e)
@@ -36,25 +39,57 @@ public class JDBCManager {
 			
 			Statement stmt = c.createStatement();
 			
-			String sql = "CREATE TABLE Therapists"
-					+ "	id	INTEGER PRIMARY KEY AUTOINCREMENT"
-					+ "	name TEXT"
-					+ "	surname TEXT"
-					+ "	speciality TEXT"
-					+ "	 email TEXT NOT NULL "
+			String sql = "CREATE TABLE Therapists("
+					+ "id	INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "name TEXT,"
+					+ "surname TEXT,"
+					+ "speciality TEXT,"
+					+ "email TEXT NOT NULL,"
 					+ "	 phone  INTEGER )";		
 			stmt.executeUpdate(sql);
 			
 			
-			sql= "CREATE TABLE Patients"
-					+ "	id	INTEGER PRIMARY KEY AUTOINCREMENT"
-					+ "	name	TEXT"
-					+ "	surname	TEXT"
-					+ "	dob	date"
-					+ "	telephone	INTEGER"
-					+ "	credit_card	TEXT"
-					+ "	email TEXT NOT NULL"
+			sql= "CREATE TABLE Patients("
+					+ "	id	INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "	name	TEXT,"
+					+ "	surname	TEXT,"
+					+ "	dob	date,"
+					+ "	telephone	INTEGER,"
+					+ "	credit_card	TEXT,"
+					+ "	email TEXT NOT NULL,"
 					+ "	therapist_id INTEGER REFERENCES Therapists(id) )";
+			stmt.executeUpdate(sql);
+			
+			
+			sql = "CREATE TABLE Therapies ("
+					+ "	id	INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "	description TEXT NOT NULL,"
+					+ "	machine	TEXT)";
+			stmt.executeUpdate(sql);
+			
+			
+			sql="CREATE TABLE Therapist_therapies ("
+					+ "	therapist_id	INTEGER REFERENCES Therapists(id),"
+					+ "	therapies_id	INTEGER REFERENCES Therapies(id),"
+					+ "	PRIMARY KEY(therapist_id, therapies_id) )";
+			stmt.executeUpdate(sql);
+			
+			sql="CREATE TABLE Patient_therapies ("
+					+ "	id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "	patient_id	INTEGER REFERENCES Therapists(id) NOT  NULL,"
+					+ "	therapies_id	INTEGER REFERENCES Therapies(id) NOT NULL,"
+					+ "	comments TEXT,"
+					+ "	therapy_date DATE NOT NULL)";
+			stmt.executeUpdate(sql);
+			
+			
+			// insert default values to the tables
+			sql = "INSERT INTO Therapists (name, surname, speciality, email, phone)"
+					+"VALUES('Christian', 'Fox', 'Trauma', 'chris@email.com', 89085245)";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO Therapists (name, surname, speciality, email, phone)"
+					+"VALUES('Maria', 'Dallas', 'Physio', 'maria@email.com', 89234545)";
 			stmt.executeUpdate(sql);
 			
 			
