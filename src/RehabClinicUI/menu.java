@@ -12,9 +12,7 @@ public class menu {
 		jdbcmanager = new JDBCManager();
 		
 		
-		
-		
-		
+			
 		
 		System.out.println("Hello World");
 
