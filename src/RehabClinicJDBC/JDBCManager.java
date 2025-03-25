@@ -103,7 +103,10 @@ public class JDBCManager {
 		
 	}
 	
-	public void closeConnection() {
+	public Connection getConnection() {
+		return c;
+	}
+public void closeConnection() {
 		
 		try {		
 			c.close();
