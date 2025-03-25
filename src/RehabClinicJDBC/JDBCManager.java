@@ -84,11 +84,11 @@ public class JDBCManager {
 			
 			
 			// insert default values to the tables
-			sql = "INSERT INTO Therapists (name, surname, speciality, email, phone)"
+			sql = "INSERT INTO Clinicians (name, surname, speciality, email, phone)"
 					+"VALUES('Christian', 'Fox', 'Trauma', 'chris@email.com', 89085245)";
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO Therapists (name, surname, speciality, email, phone)"
+			sql = "INSERT INTO Clinicians (name, surname, speciality, email, phone)"
 					+"VALUES('Maria', 'Dallas', 'Physio', 'maria@email.com', 89234545)";
 			stmt.executeUpdate(sql);
 			
