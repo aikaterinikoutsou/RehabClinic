@@ -20,7 +20,7 @@ public class Patient implements Serializable{
 	private Integer telephone;
 	private String email;
 	private Integer credit_card;
-	private Therapists therapist;
+	private Clinician therapist;
 
 	private String history;
 	
@@ -107,12 +107,12 @@ public class Patient implements Serializable{
 		this.credit_card = credit_card;
 	}
 
-	public Therapists getTherapist() {
+	public Clinician getTherapist() {
 		return therapist;
 	}
 
 
-	public void setTherapist(Therapists therapist) {
+	public void setTherapist(Clinician therapist) {
 		this.therapist = therapist;
 	}
 

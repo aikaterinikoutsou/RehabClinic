@@ -39,13 +39,13 @@ public class JDBCManager {
 			
 			Statement stmt = c.createStatement();
 			
-			String sql = "CREATE TABLE Therapists("
+			String sql = "CREATE TABLE Clinicians("
 					+ "id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "speciality TEXT,"
 					+ "email TEXT NOT NULL,"
-					+ "	 phone  INTEGER )";		
+					+ "phone  INTEGER )";		
 			stmt.executeUpdate(sql);
 			
 			
@@ -57,26 +57,26 @@ public class JDBCManager {
 					+ "	telephone	INTEGER,"
 					+ "	credit_card	TEXT,"
 					+ "	email TEXT NOT NULL,"
-					+ "	therapist_id INTEGER REFERENCES Therapists(id) )";
+					+ "	therapist_id INTEGER REFERENCES Clinicians(id) )";
 			stmt.executeUpdate(sql);
 			
 			
 			sql = "CREATE TABLE Therapies ("
 					+ "	id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "	description TEXT NOT NULL,"
-					+ "	machine	TEXT)";
+					+ "	machine	BLOB)";
 			stmt.executeUpdate(sql);
 			
 			
-			sql="CREATE TABLE Therapist_therapies ("
-					+ "	therapist_id	INTEGER REFERENCES Therapists(id),"
+			sql="CREATE TABLE Clinician_therapies ("
+					+ "	therapist_id	INTEGER REFERENCES Clinicians(id),"
 					+ "	therapies_id	INTEGER REFERENCES Therapies(id),"
 					+ "	PRIMARY KEY(therapist_id, therapies_id) )";
 			stmt.executeUpdate(sql);
 			
 			sql="CREATE TABLE Patient_therapies ("
 					+ "	id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "	patient_id	INTEGER REFERENCES Therapists(id) NOT  NULL,"
+					+ "	patient_id	INTEGER REFERENCES Clinicians(id) NOT  NULL,"
 					+ "	therapies_id	INTEGER REFERENCES Therapies(id) NOT NULL,"
 					+ "	comments TEXT,"
 					+ "	therapy_date DATE NOT NULL)";
