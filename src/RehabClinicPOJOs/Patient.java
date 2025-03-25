@@ -2,6 +2,8 @@ package RehabClinicPOJOs;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Patient implements Serializable{
@@ -21,12 +23,12 @@ public class Patient implements Serializable{
 	private String email;
 	private Integer credit_card;
 	private Clinician therapist;
-
-	private String history;
-	
+	private List<Patient_Therapy> pt;
 	
 	public Patient() {
 		super();
+		
+		pt= new ArrayList<Patient_Therapy>();
 	}
 
 
@@ -116,9 +118,19 @@ public class Patient implements Serializable{
 		this.therapist = therapist;
 	}
 
+	public List<Patient_Therapy> getPt() {
+		return pt;
+	}
+
+
+	public void setPt(List<Patient_Therapy> pt) {
+		this.pt = pt;
+	}
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(DNI, credit_card, dob, email, id, name, surname, telephone, therapist);
+		return Objects.hash(DNI, credit_card, dob, email, id, name, pt, surname, telephone, therapist);
 	}
 
 
@@ -133,15 +145,16 @@ public class Patient implements Serializable{
 		Patient other = (Patient) obj;
 		return Objects.equals(DNI, other.DNI) && Objects.equals(credit_card, other.credit_card)
 				&& Objects.equals(dob, other.dob) && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(surname, other.surname)
-				&& Objects.equals(telephone, other.telephone) && Objects.equals(therapist, other.therapist);
+				&& Objects.equals(name, other.name) && Objects.equals(pt, other.pt)
+				&& Objects.equals(surname, other.surname) && Objects.equals(telephone, other.telephone)
+				&& Objects.equals(therapist, other.therapist);
 	}
 
 
 	@Override
 	public String toString() {
 		return "Patient [DNI=" + DNI + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", telephone="
-				+ telephone + ", email=" + email + ", credit_card=" + credit_card + "]";
+				+ telephone + ", email=" + email + ", credit_card=" + credit_card + ", therapist=" + therapist + "]";
 	}
 
 	

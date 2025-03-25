@@ -1,6 +1,8 @@
 package RehabClinicPOJOs;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Clinician implements Serializable {
@@ -10,16 +12,20 @@ public class Clinician implements Serializable {
 	 */
 	private static final long serialVersionUID = 1730535744139817679L;
 
-	Integer id;
-	String name;
-	String surname;
-	String speciality;
-	String email;
-	Integer phone;
+	private Integer id;
+	private String name;
+	private String surname;
+	private String speciality;
+	private String email;
+	private Integer phone;
+	private List<Patient> patients;
+	private List<Therapy> therapies;
 	
 	
 	public Clinician() {
 		super();
+		patients = new ArrayList<Patient>();
+		therapies = new ArrayList<Therapy>();
 	}
 
 
@@ -83,9 +89,29 @@ public class Clinician implements Serializable {
 	}
 
 
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+
+	public List<Therapy> getTherapies() {
+		return therapies;
+	}
+
+
+	public void setTherapies(List<Therapy> therapies) {
+		this.therapies = therapies;
+	}
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, name, phone, speciality, surname);
+		return Objects.hash(email, id, name, patients, phone, speciality, surname, therapies);
 	}
 
 
@@ -99,15 +125,16 @@ public class Clinician implements Serializable {
 			return false;
 		Clinician other = (Clinician) obj;
 		return Objects.equals(email, other.email) && Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(phone, other.phone) && Objects.equals(speciality, other.speciality)
-				&& Objects.equals(surname, other.surname);
+				&& Objects.equals(patients, other.patients) && Objects.equals(phone, other.phone)
+				&& Objects.equals(speciality, other.speciality) && Objects.equals(surname, other.surname)
+				&& Objects.equals(therapies, other.therapies);
 	}
 
 
 	@Override
 	public String toString() {
-		return "Clinician [name=" + name + ", surname=" + surname + ", speciality=" + speciality + ", email=" + email
-				+ ", phone=" + phone + "]";
+		return "Clinician [id=" + id + ", name=" + name + ", surname=" + surname + ", speciality=" + speciality
+				+ ", email=" + email + ", phone=" + phone + ", patients=" + patients + "]";
 	}
 	
 	
