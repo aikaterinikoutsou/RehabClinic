@@ -15,7 +15,6 @@ public class Patient implements Serializable{
 	private static final long serialVersionUID = 152349264546461202L;
 	
 	private Integer id;
-	private String DNI;
 	private String name;
 	private String surname;
 	private Date dob;
@@ -31,6 +30,19 @@ public class Patient implements Serializable{
 		pt= new ArrayList<Patient_Therapy>();
 	}
 
+	
+
+	public Patient(String name, String surname, Date dob, Integer telephone, String email, Integer credit_card) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.telephone = telephone;
+		this.email = email;
+		this.credit_card = credit_card;
+	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -39,15 +51,6 @@ public class Patient implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getDNI() {
-		return DNI;
-	}
-
-
-	public void setDNI(String dNI) {
-		DNI = dNI;
 	}
 
 	public String getName() {
@@ -130,7 +133,7 @@ public class Patient implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(DNI, credit_card, dob, email, id, name, pt, surname, telephone, therapist);
+		return Objects.hash(credit_card, dob, email, id, name, pt, surname, telephone, therapist);
 	}
 
 
@@ -143,7 +146,7 @@ public class Patient implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Patient other = (Patient) obj;
-		return Objects.equals(DNI, other.DNI) && Objects.equals(credit_card, other.credit_card)
+		return  Objects.equals(credit_card, other.credit_card)
 				&& Objects.equals(dob, other.dob) && Objects.equals(email, other.email) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(pt, other.pt)
 				&& Objects.equals(surname, other.surname) && Objects.equals(telephone, other.telephone)
@@ -153,7 +156,7 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Patient [DNI=" + DNI + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", telephone="
+		return "Patient [name=" + name + ", surname=" + surname + ", dob=" + dob + ", telephone="
 				+ telephone + ", email=" + email + ", credit_card=" + credit_card + ", therapist=" + therapist + "]";
 	}
 
