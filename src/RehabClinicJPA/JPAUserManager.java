@@ -1,8 +1,11 @@
 package RehabClinicJPA;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -17,6 +20,7 @@ public class JPAUserManager implements UserManager{
 
 	public JPAUserManager() {
 		super();
+		this.connect();
 	}
 	@Override
 	public void connect() {
@@ -74,9 +78,39 @@ public class JPAUserManager implements UserManager{
 	public List<Role> getRoles(){
 		
 		Query q = em.createNativeQuery("SELECT * FROM roles", Role.class);
+		@SuppressWarnings("unchecked")
 		List<Role> roles = (List<Role>) q.getResultList();
 		
 		return roles;
+	};
+	
+	
+	@Override
+	public User checkPassword(String email, String pw) {
+		
+		User u = null;
+		
+		
+		Query q = em.createNativeQuery("SELECT * FROM users where email= ? AND password = ?", User.class);
+		q.setParameter(1, email);
+		try {
+			MessageDigest md= MessageDigest.getInstance("MD5");
+			md.update(pw.getBytes());
+			byte[] digest = md.digest();
+			q.setParameter(2, digest);
+						
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			
+		}
+		
+		try {
+			
+			u = (User) q.getSingleResult();
+		}catch(NoResultException e) {}
+		
+		return u;
+		
 	}
 
 }

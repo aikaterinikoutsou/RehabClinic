@@ -1,6 +1,7 @@
 package RehabClinicUI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.sql.Date;
@@ -31,7 +32,6 @@ public class menu {
 		patientManager = new JDBCPatientManager(jdbcmanager);
 		usermanager = new JPAUserManager();
 		
-		usermanager.connect();
 		int choice=0;
 		try {
 			
@@ -50,7 +50,7 @@ public class menu {
 				{
 				
 				case 1: // add new patient
-					//addPatient();
+					login();
 					break;
 				case 2: // Sign-up
 					addNewUser();
@@ -72,6 +72,41 @@ public class menu {
 		
 	}
 	
+	@SuppressWarnings("unused")
+	private static void login() {
+		// TODO Auto-generated method stub
+		
+		
+		try {
+			System.out.println("Introduce email:");
+			String email = reader.readLine();
+			System.out.println("Introduce password");
+			String passw = reader.readLine();
+			
+			User u = usermanager.checkPassword(email, passw);
+			
+			if (u!=null & u.getRole().getDescription().equals("Patient"))
+			{
+				
+				System.out.println("Login Successful!");
+				patientmenu(u.getEmail());
+			}
+			else if(u==null)
+				System.out.println("No user with these credentials");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private static void patientmenu(String email) {
+		// TODO Auto-generated method stub
+		
+		patientManager.getPatient(email);
+		
+	}
+
 	private static void addPatient() throws Exception
 	{
 		

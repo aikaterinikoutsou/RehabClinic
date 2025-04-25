@@ -39,5 +39,11 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		
 	}
+
+	@Override
+	public void getPatient(String email) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

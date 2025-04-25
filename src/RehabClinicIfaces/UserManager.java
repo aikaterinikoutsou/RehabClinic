@@ -13,5 +13,6 @@ public interface UserManager {
 	void newUser(User u);
 	Role getRole(Integer id);
 	List<Role> getRoles();
+	User checkPassword(String email, String pw);
 
 }
