@@ -10,10 +10,11 @@ public class JDBCPatientManager implements PatientManager {
 	private JDBCManager manager;
 	
 	
-	private JDBCPatientManager(JDBCManager m) {
+	public JDBCPatientManager(JDBCManager m) {
 		this.manager = m;
 	}
 	
+	@Override
 	public void addPatient(Patient p) {
 		try {
 			

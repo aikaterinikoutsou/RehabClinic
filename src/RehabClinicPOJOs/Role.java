@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.TableGenerator;
 
 public class Role implements Serializable {
@@ -31,6 +32,13 @@ public class Role implements Serializable {
 		
 	}
 	
+	public Role(String description) {
+		super();
+		this.description = description;
+		users = new ArrayList<User>();
+
+	}
+
 	public List<User> getUsers() {
 		return users;
 	}
