@@ -13,12 +13,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="Patient")
-//@XmlType(propOrder = )
+@XmlType(propOrder = {"name", "surname", "email", "credit_card", "therapies","clinician"})
 public class Patient implements Serializable{
 
 	
@@ -41,10 +42,10 @@ public class Patient implements Serializable{
 	private String email;
 	@XmlElement
 	private Integer credit_card;
-	@XmlElement
+	@XmlElement(name= "clinician")
 	private Clinician therapist;
-	@XmlElement(name= "Therapy")
-	@XmlElementWrapper(name = "Therapies")
+	@XmlElement(name= "therapy")
+	@XmlElementWrapper(name = "therapies")
 	private List<Patient_Therapy> pt;
 	
 	public Patient() {
