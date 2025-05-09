@@ -5,6 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="Clinician")
+@XmlType(propOrder = {"name","surname","email","phone"})
 public class Clinician implements Serializable {
 
 	/**
@@ -12,13 +24,21 @@ public class Clinician implements Serializable {
 	 */
 	private static final long serialVersionUID = 1730535744139817679L;
 
+	@XmlTransient
 	private Integer id;
+	@XmlElement
 	private String name;
+	@XmlElement
 	private String surname;
+	@XmlAttribute
 	private String speciality;
+	@XmlElement
 	private String email;
+	@XmlElement
 	private Integer phone;
+	@XmlTransient
 	private List<Patient> patients;
+	@XmlTransient
 	private List<Therapy> therapies;
 	
 	
@@ -26,6 +46,16 @@ public class Clinician implements Serializable {
 		super();
 		patients = new ArrayList<Patient>();
 		therapies = new ArrayList<Therapy>();
+	}
+
+
+	public Clinician(String name, String surname, String speciality, String email, Integer phone) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.speciality = speciality;
+		this.email = email;
+		this.phone = phone;
 	}
 
 

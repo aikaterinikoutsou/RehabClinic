@@ -1,5 +1,6 @@
 package RehabClinicJDBC;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class JDBCClinicianManager implements ClinicianManager {
 				String email = rs.getString("email");
 				Integer phone = rs.getInt("phone");
 				
-				Clinician c= new Clinician(id,name,surname,speciality,email,phone);
+				Clinician c= new Clinician(id, name,surname,speciality,email,phone);
 				clinicians.add(c);
 			}
 
@@ -50,4 +51,26 @@ public class JDBCClinicianManager implements ClinicianManager {
 		
 	}
 	
+	@Override
+	public void addClinician(Clinician c)
+	{
+		
+		try {
+			String sql= "INSERT INTO Clinicians (name, surname, speciality, email, phone) VALUES(?,?,?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, c.getName());
+			prep.setString(2,c.getSurname());
+			prep.setString(3,c.getSpeciality());
+			prep.setString(4, c.getEmail());
+			prep.setInt(5,c.getPhone());
+			
+			prep.executeUpdate();
+			
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }

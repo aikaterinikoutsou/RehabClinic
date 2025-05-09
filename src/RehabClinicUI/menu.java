@@ -1,6 +1,7 @@
 package RehabClinicUI;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
@@ -9,28 +10,38 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import RehabClinicIfaces.ClinicianManager;
 import RehabClinicIfaces.PatientManager;
 import RehabClinicIfaces.UserManager;
+import RehabClinicIfaces.XMLManager;
+import RehabClinicJDBC.JDBCClinicianManager;
 import RehabClinicJDBC.JDBCManager;
 import RehabClinicJDBC.JDBCPatientManager;
 import RehabClinicJPA.JPAUserManager;
+import RehabClinicPOJOs.Clinician;
 import RehabClinicPOJOs.Patient;
 import RehabClinicPOJOs.Role;
 import RehabClinicPOJOs.User;
+import RehabClinicXML.XMLManagerImpl;
 
 public class menu {
 	
 	private static JDBCManager jdbcmanager;
 	private static PatientManager patientManager;
+	private static ClinicianManager clinicianManager;
 	private static UserManager usermanager;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
-
+	private static XMLManager xmlmanager;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method 
 	
 		jdbcmanager = new JDBCManager();
 		patientManager = new JDBCPatientManager(jdbcmanager);
 		usermanager = new JPAUserManager();
+		xmlmanager = new XMLManagerImpl();
+		clinicianManager = new JDBCClinicianManager(jdbcmanager);	
+		
 		
 		int choice=0;
 		try {
@@ -103,8 +114,14 @@ public class menu {
 	private static void patientmenu(String email) {
 		// TODO Auto-generated method stub
 		
-		patientManager.getPatient(email);
+		//patientManager.getPatient(email);
 		
+		xmlmanager.patient2xml(1);
+		
+		//File file = new File("./xmls/external_clinician.xml");
+		//Clinician c = xmlmanager.xml2Clinician(file);
+		
+		//clinicianManager.addClinician(c);	
 	}
 
 	private static void addPatient() throws Exception

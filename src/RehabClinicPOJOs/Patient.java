@@ -14,12 +14,14 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import RehabClinicXmlUtils.SQLDateAdapter;
 
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="Patient")
-@XmlType(propOrder = {"name", "surname", "email", "credit_card", "therapies","clinician"})
+@XmlType(propOrder = {"name", "surname", "dob","email", "credit_card", "therapist"})
 public class Patient implements Serializable{
 
 	
@@ -33,8 +35,8 @@ public class Patient implements Serializable{
 	@XmlElement
 	private String name;
 	@XmlElement
-	private String surname;
-	@XmlAttribute
+	private String surname;	
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dob;
 	@XmlAttribute
 	private Integer telephone;
@@ -42,10 +44,12 @@ public class Patient implements Serializable{
 	private String email;
 	@XmlElement
 	private Integer credit_card;
+	//@XmlTransient
 	@XmlElement(name= "clinician")
 	private Clinician therapist;
-	@XmlElement(name= "therapy")
-	@XmlElementWrapper(name = "therapies")
+	//@XmlElement(name= "therapy")
+	//@XmlElementWrapper(name = "therapies")
+	@XmlTransient
 	private List<Patient_Therapy> pt;
 	
 	public Patient() {
